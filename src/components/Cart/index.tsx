@@ -50,33 +50,33 @@ const Cart = () => {
         .min(5, 'O campo precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório.'),
       city: Yup.string()
-        .min(5, 'O campo precisa ter pelo menos 5 caracteres')
+        .min(3, 'O campo precisa ter pelo menos 3 caracteres')
         .required('O campo é obrigatório.'),
       cep: Yup.string()
-        .min(9, 'O campo precisa estar completo')
+        .matches(/^\d{5}-\d{3}$/, 'Digite um CEP válido (ex: 12345-678)')
         .required('O campo é obrigatório.'),
       homeNumber: Yup.string()
-        .min(1, 'O campo precisa ter pelo menos 1 caracteres')
+        .min(1, 'O campo precisa ter pelo menos 1 caractere')
         .required('O campo é obrigatório.'),
-      complement: Yup.string().min(
-        5,
-        'O campo precisa ter pelo menos 5 caracteres'
-      ),
+      complement: Yup.string().notRequired().nullable(),
 
       cardDisplayName: Yup.string()
         .min(5, 'O campo precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório.'),
       cardNumber: Yup.string()
-        .min(16, 'O campo precisa ter 24 caracteres')
+        .matches(
+          /^(\d{4} ){3}\d{4}$/,
+          'Digite um número de cartão válido (16 dígitos)'
+        )
         .required('O campo é obrigatório.'),
       expiresMonth: Yup.string()
-        .min(0, 'O campo precisa ter 2 caracteres')
+        .matches(/^(0[1-9]|1[0-2])$/, 'Digite um mês válido (01 a 12)')
         .required('O campo é obrigatório.'),
       expiresYear: Yup.string()
-        .min(2, 'O campo precisa ter 2 caracteres')
+        .matches(/^\d{2}$/, 'Digite um ano válido (ex: 25)')
         .required('O campo é obrigatório.'),
       cardCode: Yup.string()
-        .min(3, 'O campo precisa ter 3 caracteres')
+        .matches(/^\d{3}$/, 'Digite um código válido (3 dígitos)')
         .required('O campo é obrigatório.')
     }),
     onSubmit: async (values) => {
