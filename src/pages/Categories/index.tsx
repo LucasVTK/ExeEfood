@@ -32,7 +32,7 @@ const Categories = () => {
   const [capa, setCapa] = useState<string>('')
 
   useEffect(() => {
-    fetch('/restaurantes.json')
+    fetch(`${process.env.PUBLIC_URL}/restaurantes.json`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Erro ao carregar restaurantes.json: ${res.status}`)

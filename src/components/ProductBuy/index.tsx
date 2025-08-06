@@ -9,17 +9,8 @@ import {
   CenterA
 } from './styles'
 import close from '../../assets/images/close.png'
-import React, { useEffect, useState } from 'react'
-import {
-  Card,
-  Descricao,
-  Titulo,
-  Infos,
-  Imagem,
-  Container,
-  Nota,
-  Comprar
-} from './styles'
+import { useState } from 'react'
+import { Card, Descricao, Titulo, Container, Imagem, Comprar } from './styles'
 import { TagBigBuy, TagComprar } from '../TagBuy'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
@@ -45,21 +36,19 @@ type CardapioItem = {
   porcao: string
 }
 
-type Restaurante = {
-  id: number
-  titulo: string
-  destacado: boolean
-  tipo: string
-  avaliacao: number
-  descricao: string
-  capa: string
-  cardapio: CardapioItem[]
-}
+// type Restaurante = {
+//   id: number
+//   titulo: string
+//   destacado: boolean
+//   tipo: string
+//   avaliacao: number
+//   descricao: string
+//   capa: string
+//   cardapio: CardapioItem[]
+// }
 
 const ProductBuy = ({
   title,
-  category,
-  type,
   description,
   image,
   preco,
@@ -67,7 +56,6 @@ const ProductBuy = ({
   cardapioItem
 }: Props) => {
   const [modalEstaAberto, setModalEstaAberto] = useState(false)
-  const [restaurante, setRestaurante] = useState<Restaurante | null>(null)
 
   const dispatch = useDispatch()
 
@@ -76,9 +64,9 @@ const ProductBuy = ({
     dispatch(open())
   }
 
-  const openCart = () => {
-    dispatch(open())
-  }
+  // dependia da API que está offline
+  /*
+  const [restaurante, setRestaurante] = useState<Restaurante | null>(null)
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
@@ -90,11 +78,13 @@ const ProductBuy = ({
       })
       .catch((error) => console.error('Erro ao buscar dados da API:', error))
   }, [])
+  */
 
   const descricaoLimitada =
     description.length > 240
       ? `${description.substring(0, 240)}...`
       : description
+
   return (
     <>
       <Card>
@@ -114,47 +104,45 @@ const ProductBuy = ({
           </a>
         </Comprar>
       </Card>
-      {restaurante &&
-        restaurante.cardapio.map((item: CardapioItem) => (
-          <React.Fragment key={item.id}>
-            <Modal className={modalEstaAberto ? 'visivel' : ''} key={image}>
-              <ModalContent>
-                <ItemImagem>
-                  <img src={image} alt={title} />
-                </ItemImagem>
-                <Item key={image}>
-                  <header>
-                    <Fechar
-                      src={close}
-                      alt="icone de fechar"
-                      onClick={() => setModalEstaAberto(false)}
-                    />
-                  </header>
-                  <TituloCompra>{title}</TituloCompra>
-                  <DescricaoCompra>
-                    {description}
-                    <br />
-                    <br /> Serve {porcao}
-                  </DescricaoCompra>
-                  <CenterA onClick={addToCart}>
-                    <TagComprar>
-                      Adicionar ao carrinho -{' '}
-                      {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                      }).format(preco)}
-                    </TagComprar>
-                  </CenterA>
-                </Item>
-              </ModalContent>
-              <div
-                onClick={() => setModalEstaAberto(false)}
-                className="overlay"
-              ></div>
-            </Modal>
-          </React.Fragment>
-        ))}
+      {modalEstaAberto && (
+        <Modal className="visivel">
+          <ModalContent>
+            <ItemImagem>
+              <img src={image} alt={title} />
+            </ItemImagem>
+            <Item>
+              <header>
+                <Fechar
+                  src={close}
+                  alt="icone de fechar"
+                  onClick={() => setModalEstaAberto(false)}
+                />
+              </header>
+              <TituloCompra>{title}</TituloCompra>
+              <DescricaoCompra>
+                {description}
+                <br />
+                <br /> Serve {porcao}
+              </DescricaoCompra>
+              <CenterA onClick={addToCart}>
+                <TagComprar>
+                  Adicionar ao carrinho -{' '}
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(preco)}
+                </TagComprar>
+              </CenterA>
+            </Item>
+          </ModalContent>
+          <div
+            onClick={() => setModalEstaAberto(false)}
+            className="overlay"
+          ></div>
+        </Modal>
+      )}
     </>
   )
 }
+
 export default ProductBuy

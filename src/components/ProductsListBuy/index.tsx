@@ -22,8 +22,15 @@ const ProductsListBuy = ({ background }: Props) => {
   const [restaurants, setRestaurants] = useState<Restaurante[]>([])
   const { id } = useParams()
 
+  // useEffect(() => {
+  //   fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+  //     .then((res) => res.json())
+  //     .then((res) => setRestaurants(res))
+  // }, [])
+  // MAIS UMA TROCA PARA JSON LOCAL
+
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+    fetch('/restaurantes.json')
       .then((res) => res.json())
       .then((res) => setRestaurants(res))
   }, [])

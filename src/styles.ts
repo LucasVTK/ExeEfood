@@ -1,17 +1,20 @@
 import { createGlobalStyle } from 'styled-components'
 
+// Paleta de cores padronizada
 export const cores = {
-  cor1: '#E66767;',
+  cor1: '#E66767',
   cor2: '#FFEBD9',
   cor3: '#FFF8F2',
   cor4: '#FFFFFF'
 }
 
+// Breakpoints para responsividade
 export const breakpoints = {
   desktop: '1024px',
   tablet: '624px'
 }
 
+// Estilos globais
 export const GlobalCss = createGlobalStyle`
   * {
     margin: 0;

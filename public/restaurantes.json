@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "titulo": "Pizzaria Saborosa",
+    "destacado": true,
+    "tipo": "italiana",
+    "avaliacao": 4.8,
+    "descricao": "A melhor pizza da cidade, feita com ingredientes selecionados.",
+   "capa": "/images/LaDolceCapa.png",
+    "cardapio": [
+      {
+        "foto": "/images/pizza.png",
+        "preco": 45.90,
+        "id": 1,
+        "nome": "Pizza Calabresa",
+        "descricao": "Pizza de calabresa com cebola roxa.",
+        "porcao": "8 fatias"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Hamburgueria Gourmet",
+    "destacado": false,
+    "tipo": "Hamburguer",
+    "avaliacao": 4.5,
+    "descricao": "Hambúrguer artesanal com carne de qualidade.",
+    "capa": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjuoqGUeTqamqHJcxOuHNbOkfqsG35F6H6Zw&s",
+    "cardapio": [
+      {
+        "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCoUhMnPmRh4ILmy00z6avGA5amn6L_eCCRg&s",
+        "preco": 32.50,
+        "id": 2,
+        "nome": "Cheeseburger",
+        "descricao": "Pão brioche, queijo cheddar e carne suculenta.",
+        "porcao": "200g"
+      }
+    ]
+  }
+]

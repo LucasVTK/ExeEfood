@@ -27,7 +27,7 @@ const Home = () => {
   const [lancamentos, setLancamentos] = useState<Restaurante[]>([])
 
   useEffect(() => {
-    fetch('/restaurantes.json')
+    fetch(`${process.env.PUBLIC_URL}/restaurantes.json`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Erro ao carregar restaurantes.json: ${res.status}`)
