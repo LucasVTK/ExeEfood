@@ -27,9 +27,19 @@ const Home = () => {
   const [lancamentos, setLancamentos] = useState<Restaurante[]>([])
 
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setLancamentos(res))
+    fetch('/restaurantes.json')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Erro ao carregar restaurantes.json: ${res.status}`)
+        }
+        return res.json()
+      })
+      .then((res) => {
+        setLancamentos(res)
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar dados de restaurantes:', error)
+      })
   }, [])
 
   return (

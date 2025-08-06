@@ -32,8 +32,13 @@ const Categories = () => {
   const [capa, setCapa] = useState<string>('')
 
   useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
+    fetch('/restaurantes.json')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Erro ao carregar restaurantes.json: ${res.status}`)
+        }
+        return res.json()
+      })
       .then((res) => {
         setPromocoes(res)
         const restaurante = res.find(
@@ -44,6 +49,9 @@ const Categories = () => {
           setTipo(restaurante.tipo)
           setCapa(restaurante.capa)
         }
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar dados de restaurantes:', error)
       })
   }, [id])
 
